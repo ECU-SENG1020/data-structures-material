@@ -1,6 +1,9 @@
 # 1) Efficiency (compare two algorithms)
 # Run: julia 1_efficiency.jl
 
+module JuliaApp
+export main
+
 """Algorithm 1: check every number."""
 function get_even_numbers_version_one(; from_num::Int=2, to_num::Int=1000)
     number = from_num
@@ -49,9 +52,8 @@ function main()
     println("Algorithm 2 took $(elapsed_time) nanoseconds.")
 end
 
+if abspath(PROGRAM_FILE) == @__FILE__
+    main()
+end
 
-main()
-
-# if abspath(PROGRAM_FILE) == @__FILE__
-#     main()
-# end
+end

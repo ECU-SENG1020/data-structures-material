@@ -1,7 +1,7 @@
 // 1) Efficiency (compare two algorithms)
 // Run: node 1_efficiency.js
 
-function getEvenNumbersVersionOne({ fromNum = 2, toNum = 100 } = {}) {
+function getEvenNumbersVersionOne({ fromNum = 2, toNum = 1000 } = {}) {
   let number = fromNum;
   const evenNumbers = [];
 
@@ -15,7 +15,7 @@ function getEvenNumbersVersionOne({ fromNum = 2, toNum = 100 } = {}) {
   return evenNumbers;
 }
 
-function getEvenNumbersVersionTwo({ fromNum = 2, toNum = 100 } = {}) {
+function getEvenNumbersVersionTwo({ fromNum = 2, toNum = 1000 } = {}) {
   let number = fromNum;
   const evenNumbers = [];
 
@@ -29,11 +29,11 @@ function getEvenNumbersVersionTwo({ fromNum = 2, toNum = 100 } = {}) {
   return evenNumbers;
 }
 
-const result1 = getEvenNumbersVersionOne({ fromNum: 2, toNum: 100 });
-console.log(result1);
+const result1 = getEvenNumbersVersionOne({ fromNum: 2, toNum: 100000 });
+ console.log(result1);
 
-const result2 = getEvenNumbersVersionTwo({ fromNum: 2, toNum: 100 });
-console.log(result2);
+const result2 = getEvenNumbersVersionTwo({ fromNum: 2, toNum: 100000 });
+// console.log(result2);
 
 let startTime = process.hrtime.bigint();
 getEvenNumbersVersionOne();

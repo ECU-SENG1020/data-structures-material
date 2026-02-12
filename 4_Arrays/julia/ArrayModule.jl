@@ -1,39 +1,40 @@
 module ArrayModule
 
-export DsArray
+    export DsArray
 
-struct DsArray{T} <: AbstractVector{T}
-    ptr::Ptr{T}
-    len::Int
-end
-
-function DsArray{T}(len::Int) where T
-    bytes = len * sizeof(T)
-    ptr = Base.Libc.malloc(bytes)
-    Base.Libc.memset(ptr, 0, bytes)
-    DsArray{T}(Ptr{T}(ptr), len)
-end
-
-Base.size(A::DsArray) = (A.len,)
-Base.IndexStyle(::Type{DsArray}) = IndexLinear()
-
-Base.getindex(A::DsArray, i::Int) =
-    unsafe_load(A.ptr, i)
-
-Base.setindex!(A::DsArray, v, i::Int) =
-    unsafe_store!(A.ptr, v, i)
-
-function Base.finalize(A::DsArray)
-    Base.Libc.free(A.ptr)
-end
-
-function Base.show(io::IO, A::DsArray)
-    print(io, "DsArray of length $(A.len): [")
-    for i in 1:A.len
-        i > 1 && print(io, ", ")
-        print(io, string(unsafe_load(A.ptr, i)))
+    struct DsArray{T} <: AbstractVector{T}
+        ptr::Ptr{T}
+        len::Int
     end
-    print(io, "]")
-end
+
+    function DsArray{T}(len::Int) where T
+        bytes = len * sizeof(T)
+        ptr = Base.Libc.malloc(bytes)
+        Base.Libc.memset(ptr, 0, bytes)
+        DsArray{T}(Ptr{T}(ptr), len)
+    end
+
+    Base.size(array::DsArray) = (array.len,)
+    
+    Base.IndexStyle(::Type{DsArray}) = IndexLinear()
+
+    Base.getindex(array::DsArray, i::Int) = unsafe_load(array.ptr, i)
+
+    Base.setindex!(array::DsArray, v, i::Int) = unsafe_store!(array.ptr, v, i)
+
+    Base.finalize(array::DsArray) = Base.Libc.free(array.ptr)
+
+    function Base.finalize(array::DsArray)
+        Base.Libc.free(array.ptr)
+    end
+
+    function Base.show(io::IO, array::DsArray)
+        print(io, "DsArray of length $(array.len): [")
+        for i in 1:array.len
+            i > 1 && print(io, ", ")
+            print(io, string(unsafe_load(array.ptr, i)))
+        end
+        print(io, "]")
+    end
 
 end

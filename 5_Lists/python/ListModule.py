@@ -58,9 +58,7 @@ class DsList:
                 return node.data
             node = node.next
             count += 1
-
-        
-    
+            
     # +set data of specific element 
     def __setitem__(self, index, value):
         node = self.head
