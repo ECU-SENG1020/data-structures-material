@@ -24,6 +24,9 @@ module IntegerArrayModule
 
     Base.getindex(array::IntArray, i::Int) = unsafe_load(array.ptr, i)
     Base.setindex!(array::IntArray, v::Int, i::Int) = unsafe_store!(array.ptr, v, i)
+
+    Base.iterate(array::IntArray, state=1) = state > array.len ? nothing : (unsafe_load(array.ptr, state), state + 1)
+
     Base.finalize(array::IntArray) = Base.Libc.free(array.ptr)
 
     function Base.show(io::IO, array::IntArray)

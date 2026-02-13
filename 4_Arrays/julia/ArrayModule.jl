@@ -22,11 +22,9 @@ module ArrayModule
 
     Base.setindex!(array::DsArray, v, i::Int) = unsafe_store!(array.ptr, v, i)
 
-    Base.finalize(array::DsArray) = Base.Libc.free(array.ptr)
+    Base.iterate(array::DsArray, state=1) = state > array.len ? nothing : (unsafe_load(array.ptr, state), state + 1)
 
-    function Base.finalize(array::DsArray)
-        Base.Libc.free(array.ptr)
-    end
+    Base.finalize(array::DsArray) = Base.Libc.free(array.ptr)
 
     function Base.show(io::IO, array::DsArray)
         print(io, "DsArray of length $(array.len): [")
