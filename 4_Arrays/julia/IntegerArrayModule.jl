@@ -19,6 +19,7 @@ module IntegerArrayModule
     #     return (array.len,)
     # end
 
+
     Base.size(array::IntArray) = (array.len,)
     Base.IndexStyle(::Type{IntArray}) = IndexLinear()
 
