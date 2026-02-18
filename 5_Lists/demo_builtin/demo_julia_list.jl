@@ -1,22 +1,24 @@
 #=
-Julia Array (List) Demonstration
-A comprehensive guide to Julia's built-in Array data structure
-In Julia, what Python calls "lists" are called "Arrays" or "Vectors"
+Julia vector (List) Demonstration
+A comprehensive guide to Julia's built-in vector data structure
+In Julia, what Python calls "lists" are called "Vectors"
 =#
 
 # ============================================================================
-# 1. CREATING ARRAYS
+# 1. CREATING VECTORS
 # ============================================================================
 
-# Empty array - need to specify the type
-empty_array = Int[]  # Empty array of integers
-println("Empty array: ", empty_array)
+# Empty vector - need to specify the type
+empty_vector = []  # Empty vector of any
+empty_int_vector = Int[]  # Empty vector of integers
+println("Empty vector: ", empty_vector)
+println("Empty integer vector: ", empty_int_vector)
 
-# Array with initial values
+# vector with initial values
 fruits = ["apple", "banana", "cherry"]
 println("Fruits: ", fruits)
 
-# Array with numbers
+# vector with numbers
 numbers = [1, 2, 3, 4, 5]
 println("Numbers: ", numbers)
 
@@ -24,22 +26,22 @@ println("Numbers: ", numbers)
 mixed = [1, "hello", 3.14, true, nothing]
 println("Mixed types: ", mixed)
 
-# Creating array with repeated values
-zeros_array = zeros(Int, 5)  # [0, 0, 0, 0, 0]
-println("Five zeros: ", zeros_array)
+# Creating vector with repeated values
+zeros_vector = zeros(Int, 5)  # [0, 0, 0, 0, 0]
+println("Five zeros: ", zeros_vector)
 
-ones_array = ones(Int, 5)  # [1, 1, 1, 1, 1]
-println("Five ones: ", ones_array)
+ones_vector = ones(Int, 5)  # [1, 1, 1, 1, 1]
+println("Five ones: ", ones_vector)
 
 # Fill with specific value
 fives = fill(5, 4)  # [5, 5, 5, 5]
 println("Four fives: ", fives)
 
-# Using collect() to convert ranges to arrays
+# Using collect() to convert ranges to Vectors
 from_range = collect(1:5)  # [1, 2, 3, 4, 5]
 println("From range: ", from_range)
 
-# Convert string to array of characters
+# Convert string to vector of characters
 from_string = collect("hello")
 println("From string: ", from_string)
 
@@ -51,7 +53,7 @@ println("\n", "="^70, "\n")
 
 colors = ["red", "green", "blue", "yellow", "purple"]
 
-# Access by index - Julia arrays start at index 1 (not 0!)
+# Access by index - Julia Vectors start at index 1 (not 0!)
 first = colors[1]  # First element
 println("First color: ", first)
 
@@ -92,7 +94,7 @@ shopping = ["milk", "eggs"]
 println("Shopping list: ", shopping)
 
 # push!() - adds ONE element to the END
-# Note: ! at the end means it modifies the array
+# Note: ! at the end means it modifies the vector
 push!(shopping, "bread")
 println("After push!: ", shopping)
 
@@ -101,16 +103,16 @@ pushfirst!(shopping, "butter")
 println("After pushfirst!: ", shopping)
 
 # insert!() - adds element at specific position
-# Syntax: insert!(array, index, value)
+# Syntax: insert!(vector, index, value)
 insert!(shopping, 3, "cheese")  # Insert at index 3
 println("After insert! at index 3: ", shopping)
 
-# append!() - adds MULTIPLE elements from another array
+# append!() - adds MULTIPLE elements from another vector
 more_items = ["yogurt", "apples"]
 append!(shopping, more_items)
 println("After append!: ", shopping)
 
-# Using vcat() - concatenate vertically (creates NEW array)
+# Using vcat() - concatenate vertically (creates NEW vector)
 combined = vcat(shopping, ["oranges", "grapes"])
 println("Using vcat(): ", combined)
 println("Original shopping still: ", shopping)
@@ -150,13 +152,13 @@ println("After empty!(): ", tasks)
 println("\n", "="^70, "\n")
 
 # ============================================================================
-# 6. SLICING - Getting portions of an array
+# 6. SLICING - Getting portions of an vector
 # ============================================================================
 
 days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 println("Days: ", days)
 
-# Syntax: array[start:end]  (both start and end ARE included!)
+# Syntax: vector[start:end]  (both start and end ARE included!)
 weekdays = days[1:5]  # From index 1 to 5 (inclusive)
 println("Weekdays (1:5): ", weekdays)
 
@@ -165,7 +167,7 @@ weekend = days[6:end]  # From index 6 to the end
 println("Weekend (6:end): ", weekend)
 
 # Every nth element using range with step
-# Syntax: array[start:step:end]
+# Syntax: vector[start:step:end]
 every_other = days[1:2:end]  # Every 2nd element
 println("Every other (1:2:end): ", every_other)
 
@@ -176,7 +178,7 @@ println("Reversed (end:-1:1): ", reversed_days)
 println("\n", "="^70, "\n")
 
 # ============================================================================
-# 7. ITERATING - Looping through arrays
+# 7. ITERATING - Looping through Vectors
 # ============================================================================
 
 animals = ["dog", "cat", "bird", "fish"]
@@ -217,10 +219,10 @@ numbers = [10, 20, 30, 40, 50, 30]
 
 # in operator - check if value exists
 has_30 = 30 in numbers
-println("Is 30 in the array? ", has_30)
+println("Is 30 in the vector? ", has_30)
 
 has_100 = 100 in numbers
-println("Is 100 in the array? ", has_100)
+println("Is 100 in the vector? ", has_100)
 
 # findfirst() - find position of FIRST occurrence
 position = findfirst(==(30), numbers)
@@ -247,7 +249,7 @@ println("\n", "="^70, "\n")
 unsorted = [64, 34, 25, 12, 22, 11, 90]
 println("Original: ", unsorted)
 
-# sort!() - sorts the array IN PLACE (modifies original)
+# sort!() - sorts the vector IN PLACE (modifies original)
 sort!(unsorted)
 println("After sort!(): ", unsorted)
 
@@ -256,11 +258,11 @@ unsorted = [64, 34, 25, 12, 22, 11, 90]
 sort!(unsorted, rev=true)
 println("After sort!(rev=true): ", unsorted)
 
-# sort() - returns NEW sorted array (original unchanged)
+# sort() - returns NEW sorted vector (original unchanged)
 original = [64, 34, 25, 12, 22, 11, 90]
 new_sorted = sort(original)
-println("Original array: ", original)
-println("New sorted array: ", new_sorted)
+println("Original vector: ", original)
+println("New sorted vector: ", new_sorted)
 
 # Sorting strings
 words = ["zebra", "apple", "mango", "banana"]
@@ -280,10 +282,10 @@ println("Original: ", letters)
 reverse!(letters)
 println("After reverse!(): ", letters)
 
-# reverse() - returns NEW reversed array (original unchanged)
+# reverse() - returns NEW reversed vector (original unchanged)
 letters = ["a", "b", "c", "d", "e"]
-rev_array = reverse(letters)
-println("Using reverse(): ", rev_array)
+rev_vector = reverse(letters)
+println("Using reverse(): ", rev_vector)
 println("Original unchanged: ", letters)
 
 # Using range slicing
@@ -301,7 +303,7 @@ items = [5, 10, 15, 20, 25]
 
 # length() - number of elements
 len = length(items)
-println("Array: ", items)
+println("vector: ", items)
 println("Length: ", len)
 
 # minimum() and maximum() - smallest and largest values
@@ -326,12 +328,12 @@ println("Size (dimensions): ", dimensions)
 println("\n", "="^70, "\n")
 
 # ============================================================================
-# 12. COPYING ARRAYS
+# 12. COPYING Vectors
 # ============================================================================
 
 original = [1, 2, 3]
 
-# WRONG way - just creates another reference to same array
+# WRONG way - just creates another reference to same vector
 not_a_copy = original
 push!(not_a_copy, 4)
 println("Original: ", original)  # Both changed!
@@ -344,7 +346,7 @@ push!(real_copy, 4)
 println("\nOriginal: ", original)  # Original unchanged
 println("Real copy: ", real_copy)
 
-# RIGHT way 2 - using array constructor
+# RIGHT way 2 - using vector constructor
 original = [1, 2, 3]
 constructor_copy = [original...]  # ... is splat operator
 push!(constructor_copy, 4)
@@ -354,10 +356,10 @@ println("Constructor copy: ", constructor_copy)
 println("\n", "="^70, "\n")
 
 # ============================================================================
-# 13. ARRAY COMPREHENSIONS - Concise way to create arrays
+# 13. vector COMPREHENSIONS - Concise way to create Vectors
 # ============================================================================
 
-# Basic comprehension - create array of squares
+# Basic comprehension - create vector of squares
 squares = [x^2 for x in 1:5]
 println("Squares: ", squares)
 
@@ -365,7 +367,7 @@ println("Squares: ", squares)
 evens = [x for x in 1:10 if x % 2 == 0]
 println("Even numbers: ", evens)
 
-# Transform existing array
+# Transform existing vector
 words = ["hello", "world", "julia"]
 uppercase = [uppercase(word) for word in words]
 println("Uppercase: ", uppercase)
@@ -398,11 +400,11 @@ println("repeat(arr1, 3): ", repeated)
 println("\n", "="^70, "\n")
 
 # ============================================================================
-# 15. NESTED ARRAYS - Arrays inside arrays (2D arrays)
+# 15. NESTED Vectors - Vectors inside Vectors (2D Vectors)
 # ============================================================================
 
-# Matrix - array of arrays
-# Better way in Julia: use actual 2D array syntax
+# Matrix - vector of Vectors
+# Better way in Julia: use actual 2D vector syntax
 matrix = [1 2 3; 4 5 6; 7 8 9]  # Space separates columns, ; separates rows
 
 println("Matrix:")
@@ -418,16 +420,16 @@ matrix[1, 1] = 99
 println("\nAfter changing [1, 1] to 99:")
 println(matrix)
 
-# Array of arrays (jagged array)
+# vector of Vectors (jagged vector)
 jagged = [[1, 2], [3, 4, 5], [6]]
-println("\nJagged array: ", jagged)
-println("First sub-array: ", jagged[1])
+println("\nJagged vector: ", jagged)
+println("First sub-vector: ", jagged[1])
 println("Element [2][3]: ", jagged[2][3])
 
 println("\n", "="^70, "\n")
 
 # ============================================================================
-# 16. CHECKING IF ARRAY IS EMPTY
+# 16. CHECKING IF vector IS EMPTY
 # ============================================================================
 
 empty_arr = Int[]
@@ -435,16 +437,16 @@ full_arr = [1, 2, 3]
 
 # Using isempty()
 if isempty(empty_arr)
-    println("The array is empty")
+    println("The vector is empty")
 end
 
 if !isempty(full_arr)
-    println("The array has items")
+    println("The vector has items")
 end
 
 # Check length
 if length(empty_arr) == 0
-    println("Empty array has length 0")
+    println("Empty vector has length 0")
 end
 
 println("\n", "="^70, "\n")
@@ -453,13 +455,13 @@ println("\n", "="^70, "\n")
 # 17. COMMON PATTERNS AND TIPS
 # ============================================================================
 
-# Creating ranges (don't need to collect unless you want an array)
-numbers = 1:5  # This is a range, not an array
+# Creating ranges (don't need to collect unless you want an vector)
+numbers = 1:5  # This is a range, not an vector
 println("Range 1:5: ", numbers)
 println("Type: ", typeof(numbers))
 
-numbers_array = collect(1:5)  # Convert to array
-println("As array: ", numbers_array)
+numbers_vector = collect(1:5)  # Convert to vector
+println("As vector: ", numbers_vector)
 
 # Range with step
 numbers = 0:2:10  # 0, 2, 4, 6, 8, 10
@@ -480,7 +482,7 @@ numbers = [1, 2, 3, 4, 5]
 doubled_broadcast = numbers .* 2  # Apply * 2 to each element
 println("Doubled with broadcast: ", doubled_broadcast)
 
-# Zip - combine two arrays
+# Zip - combine two Vectors
 names = ["Alice", "Bob", "Charlie"]
 ages = [25, 30, 35]
 combined = collect(zip(names, ages))
@@ -529,5 +531,5 @@ println(matrix_form)
 
 println("\n", "="^70, "\n")
 
-println("🎉 Array demonstration complete!")
-println("Julia arrays are powerful, fast, and support advanced mathematical operations!")
+println("🎉 vector demonstration complete!")
+println("Julia Vectors are powerful, fast, and support advanced mathematical operations!")

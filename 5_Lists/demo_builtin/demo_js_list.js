@@ -1,6 +1,13 @@
 /**
  * JavaScript Array Demonstration
  * A comprehensive guide to JavaScript's built-in Array data structure
+ * 
+ * In JavaScript, what Python calls "lists" are called "Arrays". 
+ * They are ordered collections of values that can hold any type of data, 
+ * including numbers, strings, objects, and even other arrays. JavaScript 
+ * arrays are dynamic and can grow or shrink in size as needed. They come 
+ * with a rich set of built-in methods for manipulation, searching, sorting, 
+ * and more.
  */
 
 // ============================================================================
