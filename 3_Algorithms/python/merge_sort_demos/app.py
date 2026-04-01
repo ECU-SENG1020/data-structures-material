@@ -14,6 +14,10 @@ print("SORTED:")
 print(" ".join(str(num) for num in numbers))
 
 
+print("SORTED DESCENDING:")
+merge_sort(numbers, 0, len(numbers) - 1, reverse=True)
+print(" ".join(str(num) for num in numbers))
+
 head = Node(10)
 head.next = Node(2)
 head.next.next = Node(78)

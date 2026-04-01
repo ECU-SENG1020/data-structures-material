@@ -1,4 +1,4 @@
-def merge(numbers, start_index, mid_index, end_index):
+def merge(numbers, start_index, mid_index, end_index, reverse=False):
     """Merge two sorted sublists of `numbers`.
 
     The sublists are numbers[start_index..mid_index] and numbers[mid_index+1..end_index]. This function
@@ -14,7 +14,7 @@ def merge(numbers, start_index, mid_index, end_index):
 
     # Merge elements from the left and right partitions in order
     while left_pos <= mid_index and right_pos <= end_index:
-        if numbers[left_pos] <= numbers[right_pos]:
+        if (numbers[left_pos] <= numbers[right_pos]) ^ reverse:
             merged_numbers[merge_pos] = numbers[left_pos]
             left_pos += 1
         else:
@@ -36,10 +36,11 @@ def merge(numbers, start_index, mid_index, end_index):
 
     # Copy the merged, sorted values back into the original list slice
     for merge_pos in range(merged_size):
+
         numbers[start_index + merge_pos] = merged_numbers[merge_pos]
 
 
-def merge_sort(numbers, start_index, end_index):
+def merge_sort(numbers, start_index, end_index, reverse = False):
 
     # Only continue if the slice has more than one element
     if start_index == end_index:
@@ -50,12 +51,12 @@ def merge_sort(numbers, start_index, end_index):
         mid_index = (start_index + end_index) // 2
 
         # Recursively sort the left half
-        merge_sort(numbers, start_index, mid_index)
+        merge_sort(numbers, start_index, mid_index, reverse)
         # Recursively sort the right half
-        merge_sort(numbers, mid_index + 1, end_index)
+        merge_sort(numbers, mid_index + 1, end_index, reverse)
         
         # Merge the two sorted halves
-        merge(numbers, start_index, mid_index, end_index)
+        merge(numbers, start_index, mid_index, end_index,reverse)
 
 
 
