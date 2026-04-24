@@ -30,6 +30,9 @@ print("After add carol:", scores)
 scores["alice"] = 93
 print("After update alice:", scores)
 
+# removed = scores.pop("brian")
+# print("Popped bob:", removed, "Remaining:", scores)
+
 removed = scores.pop("bob")
 print("Popped bob:", removed, "Remaining:", scores)
 
@@ -56,6 +59,10 @@ print("Keys:")
 for k in inventory:
     print(" ", k)
 
+print("Keys:")
+for k in inventory.keys():
+    print(" ", k)
+
 print("Values:")
 for v in inventory.values():
     print(" ", v)
@@ -63,6 +70,13 @@ for v in inventory.values():
 print("Items:")
 for k, v in inventory.items():
     print(" ", k, "->", v)
+
+print("Items:")
+for item in inventory.items():
+    print(item, type(item))
+    print("key: ", item[0])
+    print("value: ", item[1])
+
 
 print("\n" + "=" * 60 + "\n")
 

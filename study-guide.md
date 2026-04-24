@@ -1,5 +1,5 @@
 # Data Structures Study Guide
-### Topics: Arrays · Nodes · Singly Linked Lists · List Data Structures
+### Topics: Arrays · Nodes · Singly Linked Lists · List Data Structures · Sets · Dictionaries
 
 ---
 
@@ -367,14 +367,143 @@ The `+` operator always produces a **new list** — neither original list is mod
 
 ---
 
-## Part 7: Quick-Reference Summary Table
+## Part 7: Sets
+
+### What Is a Set?
+
+A **set** is a collection of **unique** elements. In most high-level languages, sets are implemented using a **hash table**, which gives very fast average-case membership checks, insertions, and deletions.
+
+### Characteristics at a Glance
+
+| Characteristic | Value |
+|---|---|
+| Linear / Non-Linear | **Non-linear** (hash-based buckets) |
+| Homogeneous / Heterogeneous | **Heterogeneous** (language-dependent constraints) |
+| Indexed / Unindexed | **Unindexed** |
+| Ordered / Unordered | **Unordered** (do not rely on iteration order) |
+| Mutable / Immutable | **Mutable** (`set`) |
+| Dynamic / Static | **Dynamic** |
+| Unique / Duplicates | **Unique only** |
+
+### Key Properties
+
+- Duplicate insertions have no effect (the value already exists).
+- Ideal for membership testing: `x in my_set`.
+- Typical operations are based on hashing.
+- Supports mathematical set operations: union, intersection, difference, symmetric difference.
+
+### Core Operations (Python examples)
+
+```python
+numbers = {1, 2, 3}
+numbers.add(4)                 # {1, 2, 3, 4}
+numbers.remove(2)              # {1, 3, 4}
+exists = 3 in numbers          # True
+
+evens = {2, 4, 6}
+odds = {1, 3, 5}
+all_nums = evens | odds        # union
+shared = evens & {4, 8}        # intersection => {4}
+```
+
+### Time & Space Complexity
+
+| Operation | Average | Worst Case |
+|---|---|---|
+| Insert | O(1) | O(n) |
+| Delete | O(1) | O(n) |
+| Membership test | O(1) | O(n) |
+| Union / Intersection / Difference | O(n + m) | O(n * m) in degenerate cases |
+| **Space** | O(n) | O(n) |
+
+> Worst-case behavior happens when many keys collide into the same hash bucket.
+
+### When to Use a Set
+
+- You need to remove duplicates.
+- You need very fast membership checks.
+- You need mathematical set operations.
+
+---
+
+## Part 8: Dictionaries (Maps / Hash Maps)
+
+### What Is a Dictionary?
+
+A **dictionary** stores **key-value pairs** where each key is unique and maps to a value. Like sets, dictionaries are usually hash-table based, so lookup by key is very fast on average.
+
+### Characteristics at a Glance
+
+| Characteristic | Value |
+|---|---|
+| Linear / Non-Linear | **Non-linear** (hash-based buckets) |
+| Homogeneous / Heterogeneous | **Heterogeneous** (keys/values can vary) |
+| Indexed / Unindexed | **Indexed by key** (not by numeric position) |
+| Ordered / Unordered | **Ordered by insertion** in modern Python; conceptually key-based |
+| Mutable / Immutable | **Mutable** |
+| Dynamic / Static | **Dynamic** |
+| Unique / Duplicates | **Keys are unique**, values may duplicate |
+
+### Key Properties
+
+- Keys must be hashable (immutable in Python: `str`, `int`, `tuple`, etc.).
+- Access is by key, not by positional index.
+- Updating an existing key overwrites the old value.
+- Very common for counters, lookups, configuration, and caching.
+
+### Core Operations (Python examples)
+
+```python
+student = {"id": 101, "name": "Ava", "gpa": 3.8}
+
+student["major"] = "Computer Science"   # insert
+student["gpa"] = 3.9                      # update
+name = student["name"]                    # lookup
+exists = "id" in student                  # membership by key
+removed = student.pop("major")            # delete and return value
+```
+
+### Time & Space Complexity
+
+| Operation | Average | Worst Case |
+|---|---|---|
+| Insert / Update by key | O(1) | O(n) |
+| Lookup by key | O(1) | O(n) |
+| Delete by key | O(1) | O(n) |
+| Iterate keys/values/items | O(n) | O(n) |
+| **Space** | O(n) | O(n) |
+
+### When to Use a Dictionary
+
+- You need fast lookup by an identifier/key.
+- You need to associate related pieces of data (`key -> value`).
+- You need frequency counts or grouping.
+
+---
+
+## Part 9: Choosing the Right Structure
+
+| Need | Best Fit | Why |
+|---|---|---|
+| Fast random access by position | **Array** | Direct index math gives O(1) access |
+| Frequent inserts/deletes at front | **Singly Linked List** | Head operations are O(1) |
+| Remove duplicates + membership checks | **Set** | Unique elements and O(1) average membership |
+| Fast lookup by key | **Dictionary** | O(1) average key-based access |
+
+---
+
+## Part 10: Quick-Reference Summary Table
 
 | Data Structure | Linear | Homogeneous | Indexed | Ordered | Mutable | Dynamic | Duplicates |
 |---|---|---|---|---|---|---|---|
-| **Array** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| **Array** | ✅ | ✅ | ✅ (numeric index) | ✅ | ✅ | ❌ | ✅ |
 | **Singly Linked List** | ✅ | ❌ | ❌* | ✅ | ✅ | ✅ | ✅ |
 | **Custom List (DsList)** | ✅ | ❌ | ✅* | ✅ | ✅ | ✅ | ✅ |
+| **Set** | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ |
+| **Dictionary** | ❌ | ❌ | ✅ (by key) | ✅** | ✅ | ✅ | Keys: ❌ / Values: ✅ |
 
 > \* Indexed *logically* (via traversal), but not via direct memory calculation like arrays.
+
+> \** In Python 3.7+, dictionaries preserve insertion order.
 
 ---
