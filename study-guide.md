@@ -1,5 +1,5 @@
 # Data Structures Study Guide
-### Topics: Arrays · Nodes · Singly Linked Lists · List Data Structures · Sets · Dictionaries
+### Topics: Arrays · Nodes · Singly Linked Lists · List Data Structures · Tuples · Sets · Dictionaries
 
 ---
 
@@ -347,27 +347,93 @@ The `+` operator always produces a **new list** — neither original list is mod
 
 ---
 
-## Part 6: Arrays vs. Linked Lists — Head-to-Head Comparison
+## Part 6: Tuples
 
-| Feature | Array | Singly Linked List |
-|---|---|---|
-| Memory layout | Contiguous | Non-contiguous (scattered) |
-| Access by index | **O(1)** — direct calculation | O(n) — must traverse |
-| Insert / Delete at front | O(n) — must shift elements | **O(1)** |
-| Insert / Delete at end | O(1) if space; O(n) if resize | O(n) — walk to tail |
-| Memory overhead | Low (only data) | Higher (data + pointer per node) |
-| Size flexibility | Fixed (static) | **Dynamic** |
-| Cache performance | Excellent (contiguous) | Poor (scattered memory) |
-| Data type requirement | Homogeneous | Heterogeneous |
+### What Is a Tuple?
+
+A **tuple** is a **linear**, **ordered**, **indexed**, **immutable** sequence. In Python, tuples can hold mixed data types and have a fixed length after creation.
+
+### Characteristics at a Glance
+
+| Characteristic | Value |
+|---|---|
+| Linear / Non-Linear | **Linear** |
+| Homogeneous / Heterogeneous | **Heterogeneous** (can also be homogeneous) |
+| Indexed / Unindexed | **Indexed** |
+| Ordered / Unordered | **Ordered** |
+| Mutable / Immutable | **Immutable** |
+| Dynamic / Static | **Static** (fixed length once created) |
+| Unique / Duplicates | **Duplicates allowed** |
+
+### Key Properties
+
+- **Fixed-size grouping**: useful for storing related values like `(x, y)` coordinates.
+- **Immutability**: prevents accidental modification and makes intent clear.
+- **Hashability (conditional)**: a tuple can be used as a dictionary key only when all its elements are hashable.
+- **Packing/unpacking**: tuples naturally support returning and assigning multiple values.
+
+### Tuple Basics (Python)
+
+```python
+# creation
+t = (1, "a", 3.14)
+t2 = 1, 2, 3
+
+# single-element tuple (comma required)
+single = (42,)
+
+# unpacking
+x, y = (10, 20)
+
+# tuple methods
+count_of_1 = t2.count(1)
+index_of_2 = t2.index(2)
+```
+
+### Time & Space Complexity
+
+| Operation | Time Complexity |
+|---|---|
+| Access by index | **O(1)** |
+| Length (`len`) | **O(1)** |
+| Iteration | O(n) |
+| Membership (`in`) | O(n) |
+| Concatenation (`t + u`) | O(n + m) |
+| Slicing (`t[a:b]`) | O(k), where `k` is slice length |
+| **Space** | O(n) |
+
+### Common Pitfalls
+
+- A single-element tuple needs a trailing comma: `(5,)`.
+- Tuple immutability does not freeze nested mutable elements.
+    - Example: `(1, [2, 3])` is a tuple, but the inner list can still change.
+- `tuple.index(x)` raises `ValueError` when `x` is not present.
+
+---
+
+## Part 7: Arrays vs. Tuples vs. Linked Lists — Head-to-Head Comparison
+
+| Feature | Array | Tuple | Singly Linked List |
+|---|---|---|---|
+| Memory layout | Contiguous | Contiguous | Non-contiguous (scattered) |
+| Access by index | **O(1)** — direct calculation | **O(1)** | O(n) — must traverse |
+| Insert / Delete at front | O(n) — must shift elements | Not supported (immutable) | **O(1)** |
+| Insert / Delete at end | O(1) if space; O(n) if resize | Not supported (immutable) | O(n) — walk to tail |
+| Memory overhead | Low (only data) | Low (fixed sequence) | Higher (data + pointer per node) |
+| Size flexibility | Fixed (static) | Fixed (static) | **Dynamic** |
+| Cache performance | Excellent (contiguous) | Excellent (contiguous) | Poor (scattered memory) |
+| Data type requirement | Homogeneous | Heterogeneous | Heterogeneous |
+| Mutability | Mutable | **Immutable** | Mutable |
 
 ### Which to Choose?
 
 - **Array** → you know the size upfront, need fast random access, or want cache efficiency.
+- **Tuple** → you need fixed, ordered data that should not change after creation.
 - **Linked List** → you need frequent insertions/deletions at the front, or the size is unpredictable.
 
 ---
 
-## Part 7: Sets
+## Part 8: Sets
 
 ### What Is a Set?
 
@@ -426,7 +492,7 @@ shared = evens & {4, 8}        # intersection => {4}
 
 ---
 
-## Part 8: Dictionaries (Maps / Hash Maps)
+## Part 9: Dictionaries (Maps / Hash Maps)
 
 ### What Is a Dictionary?
 
@@ -481,28 +547,32 @@ removed = student.pop("major")            # delete and return value
 
 ---
 
-## Part 9: Choosing the Right Structure
+## Part 10: Choosing the Right Structure
 
 | Need | Best Fit | Why |
 |---|---|---|
 | Fast random access by position | **Array** | Direct index math gives O(1) access |
+| Fixed read-only grouped values | **Tuple** | Immutable, compact, and still indexable |
 | Frequent inserts/deletes at front | **Singly Linked List** | Head operations are O(1) |
 | Remove duplicates + membership checks | **Set** | Unique elements and O(1) average membership |
 | Fast lookup by key | **Dictionary** | O(1) average key-based access |
 
 ---
 
-## Part 10: Quick-Reference Summary Table
+## Part 11: Quick-Reference Summary Table
 
 | Data Structure | Linear | Homogeneous | Indexed | Ordered | Mutable | Dynamic | Duplicates |
 |---|---|---|---|---|---|---|---|
 | **Array** | ✅ | ✅ | ✅ (numeric index) | ✅ | ✅ | ❌ | ✅ |
-| **Singly Linked List** | ✅ | ❌ | ❌* | ✅ | ✅ | ✅ | ✅ |
-| **Custom List (DsList)** | ✅ | ❌ | ✅* | ✅ | ✅ | ✅ | ✅ |
+| **Tuple** | ✅ | ❌* | ✅ (numeric index) | ✅ | ❌ | ❌ | ✅ |
+| **Singly Linked List** | ✅ | ❌ | ❌† | ✅ | ✅ | ✅ | ✅ |
+| **List** | ✅ | ❌ | ✅† | ✅ | ✅ | ✅ | ✅ |
 | **Set** | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ |
 | **Dictionary** | ❌ | ❌ | ✅ (by key) | ✅** | ✅ | ✅ | Keys: ❌ / Values: ✅ |
 
-> \* Indexed *logically* (via traversal), but not via direct memory calculation like arrays.
+> \* Tuples can be homogeneous or heterogeneous.
+
+> † Indexed *logically* (via traversal), but not via direct memory calculation like arrays.
 
 > \** In Python 3.7+, dictionaries preserve insertion order.
 
