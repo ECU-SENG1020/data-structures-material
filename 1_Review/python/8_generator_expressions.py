@@ -17,7 +17,11 @@ print(next(gen_func))
 print(next(gen_func,'No more states'))
 
 gen_func = generator_function()
+
 for state in gen_func:
+    print(state)
+
+for state in generator_function():
     print(state)
 
 

@@ -1,7 +1,7 @@
 import time
 
 # Algorithm 1
-def get_even_numbers_version_one(from_num=2, to_num=100):
+def get_even_numbers_version_one(from_num=2, to_num=1000):
     number = from_num
     even_numbers = []
     while number <= to_num:
@@ -15,7 +15,7 @@ def get_even_numbers_version_one(from_num=2, to_num=100):
 
 
 #Algorithm 2
-def get_even_numbers_version_two(from_num=2, to_num=100):
+def get_even_numbers_version_two(from_num=2, to_num=1000):
     number = from_num
     even_numbers = []
     while number <= to_num:
@@ -28,11 +28,11 @@ def get_even_numbers_version_two(from_num=2, to_num=100):
     return even_numbers
 
 
-result1 = get_even_numbers_version_one(from_num=2,to_num=100)
-print(result1)
+result1 = get_even_numbers_version_one(from_num=2,to_num=100000)
+# print(result1)
 
-result2 = get_even_numbers_version_two(from_num=2,to_num=100)
-print(result2)
+result2 = get_even_numbers_version_two(from_num=2,to_num=100000)
+# print(result2)
 
 start_time = time.perf_counter_ns()
 result1 = get_even_numbers_version_one()

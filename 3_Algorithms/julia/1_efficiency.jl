@@ -2,7 +2,7 @@
 # Run: julia 1_efficiency.jl
 
 """Algorithm 1: check every number."""
-function get_even_numbers_version_one(; from_num::Int=2, to_num::Int=100)
+function get_even_numbers_version_one(; from_num::Int=2, to_num::Int=1000)
     number = from_num
     even_numbers = Int[]
 
@@ -17,7 +17,7 @@ function get_even_numbers_version_one(; from_num::Int=2, to_num::Int=100)
 end
 
 """Algorithm 2: jump by 2 each time."""
-function get_even_numbers_version_two(; from_num::Int=2, to_num::Int=100)
+function get_even_numbers_version_two(; from_num::Int=2, to_num::Int=1000)
     number = from_num
     even_numbers = Int[]
 
@@ -32,11 +32,11 @@ function get_even_numbers_version_two(; from_num::Int=2, to_num::Int=100)
 end
 
 function main()
-    result1 = get_even_numbers_version_one(from_num=2, to_num=100)
-    println(result1)
+    result1 = get_even_numbers_version_one(from_num=2, to_num=100000)
+    # println(result1)
 
-    result2 = get_even_numbers_version_two(from_num=2, to_num=100)
-    println(result2)
+    result2 = get_even_numbers_version_two(from_num=2, to_num=100000)
+    # println(result2)
 
     start_time = time_ns()
     _ = get_even_numbers_version_one()
@@ -49,6 +49,9 @@ function main()
     println("Algorithm 2 took $(elapsed_time) nanoseconds.")
 end
 
-if abspath(PROGRAM_FILE) == @__FILE__
-    main()
-end
+
+main()
+
+# if abspath(PROGRAM_FILE) == @__FILE__
+#     main()
+# end

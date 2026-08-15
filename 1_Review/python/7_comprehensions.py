@@ -24,7 +24,9 @@ def double_num(num):
 numbers_list = [double_num(x) for x in numbers]
 print(numbers_list)
 
-numbers_set = {x for x in numbers}
+numbers2 = [1,1,2,3,4,4,5,6,7,7]
+
+numbers_set = {x for x in numbers2}
 print('Set of numbers:')
 print(numbers_set)
 
