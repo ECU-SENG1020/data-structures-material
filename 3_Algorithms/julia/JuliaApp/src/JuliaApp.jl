@@ -1,7 +1,10 @@
 # 1) Efficiency (compare two algorithms)
 # Run: julia 1_efficiency.jl
 
+
+
 module JuliaApp
+# using BenchmarkTools
 export main
 
 """Algorithm 1: check every number."""
@@ -35,25 +38,30 @@ function get_even_numbers_version_two(; from_num::Int=2, to_num::Int=1000)
 end
 
 function main()
-    result1 = get_even_numbers_version_one(from_num=2, to_num=100000)
-    # println(result1)
+    # @time get_even_numbers_version_one(from_num=2, to_num=100000)
+    # # # println(result1)
 
-    result2 = get_even_numbers_version_two(from_num=2, to_num=100000)
-    # println(result2)
+    # @time get_even_numbers_version_two(from_num=2, to_num=100000)
+    # # # println(result2)
 
-    start_time = time_ns()
+    start_time = time()
     _ = get_even_numbers_version_one()
-    elapsed_time = time_ns() - start_time
-    println("Algorithm 1 took $(elapsed_time) nanoseconds.")
+    elapsed_time = time() - start_time
+    println("Algorithm 1 took $(elapsed_time) seconds.")
 
-    start_time = time_ns()
+    start_time = time()
     _ = get_even_numbers_version_two()
-    elapsed_time = time_ns() - start_time
-    println("Algorithm 2 took $(elapsed_time) nanoseconds.")
+    elapsed_time = time() - start_time
+    println("Algorithm 2 took $(elapsed_time) seconds.")
 end
 
-if abspath(PROGRAM_FILE) == @__FILE__
-    main()
-end
+# if abspath(PROGRAM_FILE) == @__FILE__
+#     main()
+# end
+
+# function julia_main()::Cint
+#     main()
+#     return 0
+# end
 
 end

@@ -1,3 +1,3 @@
-using .JuliaApp
+using JuliaApp
 
 JuliaApp.main()
